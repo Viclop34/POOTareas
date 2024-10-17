@@ -287,7 +287,7 @@ public class Hospital {
         boolean existenConsultas = false;
 
         for (Consulta consulta : this.listaConsultas) {
-            if (consulta.getPaciente().getId().equals(idMedico) && consulta.getStatus() == Status.PENDIENTE) {
+            if (consulta.getMedico().getId().equals(idMedico) && consulta.getStatus() == Status.PENDIENTE) {
                 existenConsultas = true;
                 System.out.println(consulta.mostrarDatosConsulta());
             }

@@ -115,7 +115,7 @@ public class Menu {
 
             switch (opcion){
                 case 1:
-                    boolean validadorE = false;
+                    sc.nextLine();
                     System.out.println("VER CONSULTAS");
                     System.out.println("Ingrese su id: ");
                     String idMedico = sc.nextLine();
@@ -150,6 +150,7 @@ public class Menu {
                                 case 5:
                                     break;
                                     case 6:
+                                        sc.nextLine();
                                         System.out.println("MIS DATOS");
                                         System.out.println("Ingrese su id: ");
                                         String idMedicoParaDatos = sc.nextLine();
