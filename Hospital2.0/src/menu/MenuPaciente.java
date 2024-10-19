@@ -6,7 +6,7 @@ import usuarios.pacientes.Paciente;
 import java.util.Scanner;
 
 public class MenuPaciente {
-    private Scanner sc;
+    private Scanner sc = new Scanner(System.in);
     public int mostrarMenu() {
             System.out.println("* Sistema Hospital *");
             System.out.println("1. Ver mis consultas");

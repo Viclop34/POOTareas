@@ -6,16 +6,16 @@ import usuarios.medicos.Medico;
 import java.util.Scanner;
 
 public class MenuMedico {
-    private Scanner sc;
-    public int mostrarMenu(Medico medico, Hospital hospital) {
+    private Scanner sc = new Scanner(System.in);
+    public int mostrarMenu() {
 
             System.out.println("* Sistema Hospital *");
-            System.out.println("1. Ver mis Consultas actuales"); //Tarea
+            System.out.println("1. Ver mis Consultas actuales");
             System.out.println("2. Ver mis pacientes");
             System.out.println("3. Consutar paciente");
             System.out.println("4. Consultar expediente paciente");
             System.out.println("5. Completar consulta");
-            System.out.println("6. Ver mis datos"); //Tareas
+            System.out.println("6. Ver mis datos");
             System.out.println("7. Salir");
 
             System.out.println("Selecciona una opcion");

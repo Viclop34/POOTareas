@@ -314,7 +314,7 @@ public class Hospital {
             }
         }
     }
-
+/*
     public void generarExpedienteConsulta(String idConsulta, String idPaciente){
         Scanner sc = new Scanner(System.in);
         Consulta consulta = this.obtenerConsultaPorId(idConsulta);
@@ -337,6 +337,8 @@ public class Hospital {
         paciente.registrarExpediente(expediente);
         System.out.println(c);
     }
+
+ */
 
 
 }

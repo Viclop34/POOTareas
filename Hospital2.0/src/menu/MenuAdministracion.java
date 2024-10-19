@@ -12,8 +12,9 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class MenuAdministracion {
-    private Scanner sc;
+    private Scanner sc = new Scanner(System.in);
     public int mostrarMenu() {
+
             System.out.println("Bienvenido al Hospital Las Rosas ");
             System.out.println("Introduzca la opción que desee:  ");
             System.out.println("1. Registrar paciente");
@@ -28,12 +29,14 @@ public class MenuAdministracion {
             System.out.println("10. Mostrar medico por id");
             System.out.println("11. Mostrar consultorio por id");
             System.out.println("12. Salir");
+
+            System.out.println("Selecciona una opcion");
             int opcion = sc.nextInt();
             return opcion;
 
     }
 
-    public void procesarDatosMenu(int opcion, Hospital hospital){
+    public void procesarDatosMenu(int opcion, Hospital hospital,Administrador admin) {
         switch (opcion) {
             case 1:
                 // P-{ano actual}--{mes actual}--{longitud usuarios.pacientes + 1}--{1,100000}

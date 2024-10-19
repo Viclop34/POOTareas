@@ -1,15 +1,12 @@
 package menu;
 
-import consultas.Consulta;
-import consultorios.Consultorio;
+
 import hospital.Hospital;
 import usuarios.Usuario;
+import usuarios.administrador.Administrador;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
 import utils.Rol;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class Menu {
@@ -51,8 +48,15 @@ public class Menu {
                     intentosUsuario = 0;
                 }
                 else {
+                    Administrador administradorEnSesion = (Administrador) usuarioEnSesion;
+                    MenuAdministracion menuAdministracion = new MenuAdministracion();
+                    int opcion = 0;
+                    while (opcion != 12) {
+                        opcion = menuAdministracion.mostrarMenu();
+                        menuAdministracion.procesarDatosMenu(opcion,hospital, administradorEnSesion);
+                    }
 
-                    mostrarMenuAdministracion();
+
                     intentosUsuario = 0;
                 }
             }
