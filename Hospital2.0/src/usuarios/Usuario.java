@@ -1,5 +1,6 @@
 package usuarios;
 
+import expedientes.Expediente;
 import utils.Rol;
 
 import java.time.LocalDate;
@@ -11,7 +12,8 @@ public class Usuario {
     public LocalDate fechaNacimiento;
     public String telefono;
     private String contrasena;
-    public Rol rol; // enum
+    public Rol rol;
+    public Expediente expediente;// enum
 
     public Usuario(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String contrasena, Rol rol) {
         this.id = id;

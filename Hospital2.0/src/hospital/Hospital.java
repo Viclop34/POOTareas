@@ -2,6 +2,7 @@ package hospital;
 
 import consultas.Consulta;
 import consultorios.Consultorio;
+import expedientes.Expediente;
 import usuarios.Usuario;
 import usuarios.administrador.Administrador;
 import usuarios.medicos.Medico;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
-
+import java.util.Scanner;
 
 
 public class Hospital {
@@ -295,6 +296,46 @@ public class Hospital {
         if (!existenConsultas) {
             System.out.println("No tienes consultas");
         }
+    }
+    public Consulta obtenerConsultaPorId(String idConsulta){
+        for (Consulta consulta : this.listaConsultas) {
+            if (consulta.getId().equals(idConsulta)) {
+                return consulta;
+            }
+        }
+        return null;
+    }
+
+    public void eliminarConsultaPorId(String idConsulta){
+        for (Consulta consulta : this.listaConsultas){
+            if (consulta.getId().equals(idConsulta)) {
+                this.listaConsultas.remove(consulta);
+                return;
+            }
+        }
+    }
+
+    public void generarExpedienteConsulta(String idConsulta, String idPaciente){
+        Scanner sc = new Scanner(System.in);
+        Consulta consulta = this.obtenerConsultaPorId(idConsulta);
+        Paciente paciente = consulta.obtenerPacientePorId(idPaciente);
+
+        if (consulta == null) {
+          System.out.println("No existe una consulta con el id ingresado");
+          return;
+        }
+
+
+        consulta.setStatus(Status.TERMINADA);
+        this.eliminarConsultaPorId(idConsulta);
+
+        System.out.println("Ingresa las observaciones finales de consulta");
+        String observaciones = sc.nextLine();
+
+        Expediente expediente = new Expediente(consulta, observaciones);
+
+        paciente.registrarExpediente(expediente);
+        System.out.println(c);
     }
 
 

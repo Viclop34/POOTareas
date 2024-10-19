@@ -1,9 +1,11 @@
 package usuarios.pacientes;
 
+import expedientes.Expediente;
 import usuarios.Usuario;
 import utils.Rol;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Paciente extends Usuario {
     public String tipoSangre;
@@ -15,6 +17,7 @@ public class Paciente extends Usuario {
         super(id, nombre, apellidos, fechaNacimiento, telefono,contrasena, Rol.PACIENTE);
         this.tipoSangre = tipoSangre;
         this.sexo = sexo;
+        ArrayList<Expediente> listaExpediente = new ArrayList<>();
     }
 
     public String mostrarDatos() {
@@ -27,6 +30,10 @@ public class Paciente extends Usuario {
                 sexo,
                 telefono);
         return datos;
+    }
+
+    public void registrarExpediente(Expediente expediente) {
+        // FALTA POR RESOLVER
     }
 
     public String getTipoSangre() {
