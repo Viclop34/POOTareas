@@ -80,13 +80,13 @@ public class Hospital {
 
     public void mostrarPacientes() {
         for(Paciente paciente : this.listaPacientes) {
-            System.out.println(paciente.mostrarDatos());
+            System.out.println(paciente.mostrarInformacion());
         }
     }
 
     public void mostrarMedicos() {
         for(Medico medico : this.listaMedicos) {
-            System.out.println(medico.mostrarDatosMedico());
+            System.out.println(medico.mostrarInformacion());
         }
     }
     public void mostrarConsultorios() {
@@ -119,7 +119,7 @@ public class Hospital {
         Optional<Paciente> pacienteEncontrado = this.listaPacientes.stream().filter(paciente -> paciente.getId().equals(idPM)).findFirst();
 
         if (pacienteEncontrado.isPresent()){
-            System.out.println(pacienteEncontrado.get().mostrarDatos());
+            System.out.println(pacienteEncontrado.get().mostrarInformacion());
         } else {
             System.out.println("Paciente no encontrado");
         }
@@ -159,7 +159,7 @@ public class Hospital {
         Optional<Medico> medicoEncontrado = this.listaMedicos.stream().filter(medico -> medico.getId().equals(idMed)).findFirst();
 
         if (medicoEncontrado.isPresent()){
-            System.out.println(medicoEncontrado.get().mostrarDatosMedico());
+            System.out.println(medicoEncontrado.get().mostrarInformacion());
         } else {
             System.out.println("Medico no encontrado");
         }

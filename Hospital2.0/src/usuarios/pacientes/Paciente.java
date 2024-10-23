@@ -19,17 +19,10 @@ public class Paciente extends Usuario {
         this.sexo = sexo;
         ArrayList<Expediente> listaExpediente = new ArrayList<>();
     }
-
-    public String mostrarDatos() {
-        String datos = String.format("Id: %s, nombre: %s, apellidos: %s, fecha de nacimiento: %s, tipo de sangre: %s, sexo: %c, telefono: %s",
-                id,
-                nombre,
-                apellidos,
-                fechaNacimiento,
-                tipoSangre,
-                sexo,
-                telefono);
-        return datos;
+    @Override
+    public String mostrarInformacion() {
+       String datosPaciente = String.format("tipo de sangre: %s, Sexo : %s", tipoSangre, sexo);
+        return super.mostrarInformacion() + datosPaciente;
     }
 
     public void registrarExpediente(Expediente expediente) {

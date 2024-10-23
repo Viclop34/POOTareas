@@ -14,12 +14,9 @@ public class Medico extends Usuario {
         super(id, nombre, apellidos, fechaNacimiento, telefono, contrasena, Rol.MEDICO);
         this.rfc = rfc;
     }
-
-    public String mostrarDatosMedico(){
-        String datosMedico = String.format("Id: %s, Nombres: %s, Apellidos: %s, Fecha De Nacimiento: %s, Telefono: %s, RFC: %s",
-                id, nombre, apellidos, fechaNacimiento, telefono, rfc);
-
-        return datosMedico;
+    @Override
+    public String mostrarInformacion(){
+        return super.mostrarInformacion() + String.format("RFC: " + rfc);
     }
     public String getRfc() {
         return rfc;

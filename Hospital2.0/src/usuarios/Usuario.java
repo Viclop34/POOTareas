@@ -25,6 +25,16 @@ public class Usuario {
         this.rol = rol;
     }
 
+    protected String mostrarInformacion() {
+        String datos = String.format("Id: %s, nombre: %s, apellidos: %s, fecha de nacimiento: %s, telefono: %s",
+                id,
+                nombre,
+                apellidos,
+                fechaNacimiento,
+                telefono);
+        return datos;
+    }
+
     public String getId() {
         return id;
     }
