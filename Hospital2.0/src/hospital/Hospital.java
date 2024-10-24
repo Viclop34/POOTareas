@@ -31,8 +31,8 @@ public class Hospital {
 
     public Hospital (){
         LocalDate nacimiento  = LocalDate.of(2005,12,11);
-        Administrador administrador = new Administrador("A-001", "Alejandra", "Rangel", nacimiento,"4431894321","34224", 5, 1000,
-                "Admin123", Rol.ADMIN);
+        Administrador administrador = new Administrador("1","Ale","Rangel",nacimiento,"443165324","ale@gmail.com",
+                "234324",3,2000,"123",Rol.ADMIN);
         this.listaUsuarios.add(administrador);
         this.listaAdministradores.add(administrador);
     }
@@ -349,6 +349,17 @@ public class Hospital {
         }
         return true;
     }
+
+    public boolean validarEmailRepetido(ArrayList<? extends Usuario> listaUsuarios, String email){
+        for (Usuario usuario : listaUsuarios) {
+            if(usuario.getEmail().equals(email)){
+                System.out.println("El email ya existe");
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
 }

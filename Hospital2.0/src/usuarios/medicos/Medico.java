@@ -10,8 +10,8 @@ public class Medico extends Usuario {
     private String rfc;
 
     //constructor
-    public Medico(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String rfc, String contrasena) {
-        super(id, nombre, apellidos, fechaNacimiento, telefono, contrasena, Rol.MEDICO);
+    public Medico(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String telefono, String email, String rfc, String contrasena) {
+        super(id, nombre, apellidos, fechaNacimiento, telefono, contrasena, email, Rol.MEDICO);
         this.rfc = rfc;
     }
     @Override

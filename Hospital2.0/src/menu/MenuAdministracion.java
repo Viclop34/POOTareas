@@ -53,7 +53,8 @@ public class MenuAdministracion {
                 String apellidoPaciente = datosPaciente.get(1);
                 LocalDate fechaNacimientoPaciente = LocalDate.parse(datosPaciente.get(2));
                 String numeroTelefonoPaciente = datosPaciente.get(3);
-                String contrasena = datosPaciente.get(4);
+                String email = datosPaciente.get(4);
+                String contrasena = datosPaciente.get(5);
 
 
                 System.out.println("Ingrese el tipo de sangre del paciente: ");
@@ -65,13 +66,7 @@ public class MenuAdministracion {
                 sc.nextLine();
 
 
-                boolean numeroTelefono = hospital.numeroPaciente(numeroTelefonoPaciente);
-
-                while(!hospital.validarTelefonoRepetido(hospital.listaUsuarios, numeroTelefonoPaciente)) {
-                }
-
-
-                Paciente paciente = new Paciente(id, nombrePaciente, apellidoPaciente, fechaNacimientoPaciente, tipoSangre, sexo, numeroTelefonoPaciente, contrasena);
+                Paciente paciente = new Paciente(id, nombrePaciente, apellidoPaciente, fechaNacimientoPaciente, tipoSangre, sexo, numeroTelefonoPaciente, email, contrasena);
                 hospital.registrarPaciente(paciente);
 
 
@@ -88,7 +83,8 @@ public class MenuAdministracion {
                 String apellidoMedico = datosMedico.get(1);
                 LocalDate fechaNacimientoMedico = LocalDate.parse(datosMedico.get(2));
                 String numeroTelefonoMedico = datosMedico.get(3);
-                String contrasenaMedico = datosMedico.get(4);
+                String emailMedico = datosMedico.get(4);
+                String contrasenaMedico = datosMedico.get(5);
 
                 int anoNacimientoMedico = LocalDate.parse(datosMedico.get(2)).getYear();
                 boolean numeroMedico = hospital.numeroMedico(numeroTelefonoMedico);
@@ -120,7 +116,7 @@ public class MenuAdministracion {
                 String idMedico = hospital.generarIdMedico(apellidoMedico, anoNacimientoMedico);
 
 
-                Medico medico = new Medico(idMedico, nombreMedico, apellidoMedico, fechaNacimientoMedico, numeroTelefonoMedico, rfcMedico, contrasenaMedico);
+                Medico medico = new Medico(idMedico, nombreMedico, apellidoMedico, fechaNacimientoMedico, numeroTelefonoMedico, emailMedico, rfcMedico, contrasenaMedico);
                 hospital.registrarMedico(medico);
                 break;
 
@@ -312,15 +308,20 @@ public class MenuAdministracion {
         while (!telefonoValido) {
             System.out.println(String.format("Ingrese el numero de telefono del %s", tipoUsuario));
             numeroTelefono = sc.nextLine();
-            telefonoValido = hospital.validarTelefonoRepetido(rol == Rol.PACIENTE ? hospital.listaPacientes : hospital.listaMedicos, tipoUsuario);
+            telefonoValido = hospital.validarTelefonoRepetido(hospital.listaUsuarios, numeroTelefono);
         }
         datosEnComun.add(numeroTelefono);
 
+        boolean emailValido = false;
+        String email = sc.nextLine();
+        while (!emailValido) {
+            sc.nextLine();
+            System.out.println(String.format("Ingrese el email del %s", tipoUsuario));
+            email = sc.nextLine();
+            emailValido = hospital.validarEmailRepetido(hospital.listaUsuarios, email);
+        }
+        datosEnComun.add(email);
 
-        System.out.println(String.format("Ingrese el telefono del %s", tipoUsuario));
-        String telefono = sc.nextLine();
-        datosEnComun.add(telefono);
-        sc.nextLine();
 
         System.out.println("Ingrese una contrasena:");
         String contrasena = sc.nextLine();

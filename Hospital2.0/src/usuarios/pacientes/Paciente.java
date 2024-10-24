@@ -13,8 +13,8 @@ public class Paciente extends Usuario {
 
 
     //constructor
-    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono, String contrasena) {
-        super(id, nombre, apellidos, fechaNacimiento, telefono,contrasena, Rol.PACIENTE);
+    public Paciente(String id, String nombre, String apellidos, LocalDate fechaNacimiento, String tipoSangre, char sexo, String telefono, String email, String contrasena) {
+        super(id, nombre, apellidos, fechaNacimiento, telefono,contrasena, email, Rol.PACIENTE);
         this.tipoSangre = tipoSangre;
         this.sexo = sexo;
         ArrayList<Expediente> listaExpediente = new ArrayList<>();
