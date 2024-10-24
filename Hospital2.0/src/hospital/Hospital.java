@@ -340,6 +340,16 @@ public class Hospital {
 
  */
 
+    public boolean validarTelefonoRepetido(ArrayList<? extends Usuario> listaUsuarios, String telefono){
+        for (Usuario usuario : listaUsuarios) {
+            if(usuario.getTelefono().equals(telefono)){
+                System.out.println("El telefono ya existe");
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
 

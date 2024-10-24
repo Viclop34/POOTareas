@@ -3,6 +3,7 @@ package menu;
 import consultas.Consulta;
 import consultorios.Consultorio;
 import hospital.Hospital;
+import usuarios.Usuario;
 import usuarios.administrador.Administrador;
 import usuarios.medicos.Medico;
 import usuarios.pacientes.Paciente;
@@ -46,7 +47,7 @@ public class MenuAdministracion {
                 String id = hospital.generarIdPaciente();
                 sc.nextLine();
 
-                ArrayList<String> datosPaciente = this.obtenerDatosComun(Rol.PACIENTE);
+                ArrayList<String> datosPaciente = this.obtenerDatosComun(Rol.PACIENTE, hospital);
 
                 String nombrePaciente = datosPaciente.get(0);
                 String apellidoPaciente = datosPaciente.get(1);
@@ -66,13 +67,7 @@ public class MenuAdministracion {
 
                 boolean numeroTelefono = hospital.numeroPaciente(numeroTelefonoPaciente);
 
-                while (!numeroTelefono) {
-                    System.out.println("El telefono ingresado ya existe ");
-                    System.out.println("Ingrese el teléfono del paciente: ");
-                    numeroTelefonoPaciente = sc.nextLine();
-                    sc.nextLine();
-
-                    numeroTelefono = hospital.numeroPaciente(numeroTelefonoPaciente);
+                while(!hospital.validarTelefonoRepetido(hospital.listaUsuarios, numeroTelefonoPaciente)) {
                 }
 
 
@@ -87,7 +82,7 @@ public class MenuAdministracion {
                 System.out.println("A elegido la opcion REGISTRAR MEDICO");
                 sc.nextLine();
 
-                ArrayList<String> datosMedico = this.obtenerDatosComun(Rol.MEDICO);
+                ArrayList<String> datosMedico = this.obtenerDatosComun(Rol.MEDICO, hospital);
 
                 String nombreMedico = datosMedico.get(0);
                 String apellidoMedico = datosMedico.get(1);
@@ -296,7 +291,7 @@ public class MenuAdministracion {
         }
     }
 
-    private ArrayList<String> obtenerDatosComun(Rol rol) {
+    private ArrayList<String> obtenerDatosComun(Rol rol, Hospital hospital) {
         String tipoUsuario = rol == Rol.PACIENTE ? "paciente": rol == Rol.MEDICO ? "medico" : "administrador";
         ArrayList<String> datosEnComun = new ArrayList();
 
@@ -310,19 +305,19 @@ public class MenuAdministracion {
         sc.nextLine();
         datosEnComun.add(apellido);
 
-        System.out.println(String.format("Ingrese el ano de nacimiento del %s", tipoUsuario));
-        int anoNacimiento = sc.nextInt();
+        datosEnComun.add(obtenerFechaNacimientoUsuario(tipoUsuario));
 
-        System.out.println(String.format("Ingrese el mes de nacimiento del %s", tipoUsuario));
-        int mesNacimiento = sc.nextInt();
+        boolean telefonoValido = false;
+        String numeroTelefono = sc.nextLine();
+        while (!telefonoValido) {
+            System.out.println(String.format("Ingrese el numero de telefono del %s", tipoUsuario));
+            numeroTelefono = sc.nextLine();
+            telefonoValido = hospital.validarTelefonoRepetido(rol == Rol.PACIENTE ? hospital.listaPacientes : hospital.listaMedicos, tipoUsuario);
+        }
+        datosEnComun.add(numeroTelefono);
 
-        System.out.println(String.format("Ingrese el dia de nacimiento del %s", tipoUsuario));
-        int diaNacimiento = sc.nextInt();
 
-        LocalDate fechaNacimiento = LocalDate.of(anoNacimiento, mesNacimiento, diaNacimiento);
-        datosEnComun.add(fechaNacimiento.toString());
-
-        System.out.println(String.format("Ingrese el teledfono del %s", tipoUsuario));
+        System.out.println(String.format("Ingrese el telefono del %s", tipoUsuario));
         String telefono = sc.nextLine();
         datosEnComun.add(telefono);
         sc.nextLine();
@@ -333,6 +328,34 @@ public class MenuAdministracion {
 
         return datosEnComun;
 
+    }
+
+
+    private String obtenerFechaNacimientoUsuario(String tipoUsuario) {
+        boolean fechaValida = false;
+        LocalDate fechaNacimiento = LocalDate.now();
+
+        while (!fechaValida) {
+
+            System.out.println(String.format("Ingrese el ano de nacimiento del %s", tipoUsuario));
+            int anoNacimiento = sc.nextInt();
+
+            System.out.println(String.format("Ingrese el mes de nacimiento del %s", tipoUsuario));
+            int mesNacimiento = sc.nextInt();
+
+            System.out.println(String.format("Ingrese el dia de nacimiento del %s", tipoUsuario));
+            int diaNacimiento = sc.nextInt();
+
+            fechaNacimiento = LocalDate.of(anoNacimiento, mesNacimiento, diaNacimiento);
+
+
+            if (fechaNacimiento.isAfter(LocalDate.now())) {
+                System.out.println("La fecha de nacimiento no puede estar en el futuro");
+            } else {
+                fechaValida = true;
+            }
+        }
+        return fechaNacimiento.toString();
     }
     }
 
